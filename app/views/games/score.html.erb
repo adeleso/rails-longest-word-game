@@ -2,7 +2,7 @@
 <% if @exist%>
 <% if @english %>
 <p>Congrats ! Your score is:</p>
-<%= @answer.size %>
+<%= @score %>
 <% else %>
 <p>Sorry, <%= @answer %> is not an English word.</p>
 <% end %>
@@ -10,5 +10,7 @@
 <p>Sorry, this is not in the letters grid</p>
 <% end %>
 <br>
+<p> Your total session score is:</p>
+<%= @score %>
 <br>
 <%= link_to "Play again", new_path  %>

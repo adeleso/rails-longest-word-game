@@ -3,7 +3,6 @@ require 'open-uri'
 class GamesController < ApplicationController
   def new
     @letters = ('a'..'z').to_a.sample(10)
-    session[:current_user_id] = user.id
   end
 
   def score
@@ -11,6 +10,17 @@ class GamesController < ApplicationController
     @letters = params[:grid].split
     @exist = included?(@answer, @letters)
     @english = english_word?(@answer)
+    @score = @answer.size + previous_score
+    save_score(@score)
+    @score = previous_score
+  end
+
+  def previous_score
+    (cookies[:score] || 0).to_i
+  end
+
+  def save_score(score)
+    cookies[:score] = score
   end
 
   private
